@@ -377,7 +377,7 @@ pipeline {
       steps {
         script {
           parallel(cambpmGetMatrixStages('main-rest', failedStageTypes, { stageType, dbLabel ->
-            return cambpmWithLabels('rest-api')
+            return true //cambpmWithLabels('rest-api')
           }))
         }
       }
