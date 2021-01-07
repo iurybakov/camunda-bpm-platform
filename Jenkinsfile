@@ -375,9 +375,7 @@ pipeline {
 //    }
     stage('Engine Rest UNIT tests') {
       agent {
-        node {
-          label 'h2'
-        }
+        label 'h2'
       }
       steps {
         script {

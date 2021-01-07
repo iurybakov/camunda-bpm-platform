@@ -193,9 +193,9 @@ engine-rest-IT-embedded-wildfly:
   directory: 'qa'
   command: 'clean install -Pwildfly,h2,webapps-integration,embedded-engine-rest'
   stash:
-  - runtimeStash: true
-  - archiveStash: true
-  - qaStash: true
+    runtimeStash: true
+    archiveStash: true
+    qaStash: true
   labels:
   - 'rest-api'
   node: 'h2'
