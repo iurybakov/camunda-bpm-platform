@@ -347,7 +347,7 @@ pipeline {
     }
     stage('Engine Rest UNIT tests') {
       agent {
-        label 'h2'
+        label 'centos'
       }
       steps {
         script {
@@ -359,7 +359,7 @@ pipeline {
     }
     stage('UNIT DB tests') {
       agent {
-        label 'h2'
+        label 'centos'
       }
       steps {
         script {
