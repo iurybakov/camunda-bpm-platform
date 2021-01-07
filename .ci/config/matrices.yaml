@@ -1,3 +1,8 @@
+# Data structure:
+#
+# $matrixId:
+#   stages: [LIST; REQUIRED; Doc: defines the stage types to be used in the matrix generation ]
+#   databases: [LIST; OPTIONAL; Doc: defines the databases to be used in the stage generation ]
 main-unit:
   databases:
   - 'postgresql_96'

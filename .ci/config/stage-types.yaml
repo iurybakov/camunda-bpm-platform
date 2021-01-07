@@ -1,3 +1,23 @@
+# Data structure:
+#
+# $stageName:
+#   directory: [LIST; REQUIRED; Doc: defines the stage types to be used in the matrix generation. ]
+#   command: [LIST; REQUIRED; Doc: defines the databases to be used in the stage generation. ]
+#   stash: [MAP; REQUIRED; Doc: a map of Boolean values indicating if an artifact stash needs to be used. ]
+#     runtimeStash: [BOOLEAN; OPTIONAL;]
+#     qaStash: [BOOLEAN; OPTIONAL;]
+#     archiveStash: [BOOLEAN; OPTIONAL;]
+#   nodeLabel: [STRING; OPTIONAL; Doc: specifies the node/agent label for this stage, if this type of stage is not combined with a database label ]
+#   labels: [LIST; OPTIONAL; Doc: defines the PR labels for which this stage type should run. ]
+#   timeout: [MAP; OPTIONAL - default timeout is 3600 seconds; Doc: defines a map containing Job timeouts (in seconds) for each DB type.]
+#     postgresql: [INT; OPTIONAL;]
+#     cockroachdb: [INT; OPTIONAL;]
+#     mysql: [INT; OPTIONAL;]
+#     mariadb: [INT; OPTIONAL;]
+#     oracle: [INT; OPTIONAL;]
+#     h2: [INT; OPTIONAL;]
+#     db2: [INT; OPTIONAL;]
+#     sqlserver: [INT; OPTIONAL;]
 engine-unit:
   directory: 'engine'
   command: 'clean test -P'
@@ -25,15 +45,11 @@ webapp-unit:
   command: 'clean test -Dskip.frontend.build=true -P'
   stash:
     runtimeStash: true
-  labels:
-  - 'default-build'
 webapp-unit-authorizations:
   directory: 'webapps'
   command: 'clean test -Dskip.frontend.build=true -PcfgAuthorizationCheckRevokesAlways,'
   stash:
     runtimeStash: true
-  labels:
-  - 'default-build'
 sql-scripts:
   directory: 'distro/sql-script'
   command: 'install -Pcheck-sql,'
@@ -132,7 +148,7 @@ engine-rest-unit-jersey-2:
     runtimeStash: true
   labels:
   - 'rest-api'
-  node: 'h2'
+  nodeLabel: 'h2'
 engine-rest-unit-resteasy:
   directory: 'engine-rest/engine-rest'
   command: 'clean install -Presteasy'
@@ -140,7 +156,7 @@ engine-rest-unit-resteasy:
     runtimeStash: true
   labels:
   - 'rest-api'
-  node: 'h2'
+  nodeLabel: 'h2'
 engine-rest-unit-resteasy3:
   directory: 'engine-rest/engine-rest'
   command: 'clean install -Presteasy3'
@@ -148,7 +164,7 @@ engine-rest-unit-resteasy3:
     runtimeStash: true
   labels:
   - 'rest-api'
-  node: 'h2'
+  nodeLabel: 'h2'
 engine-rest-unit-cxf:
   directory: 'engine-rest/engine-rest'
   command: 'clean install -Pcxf'
@@ -156,7 +172,7 @@ engine-rest-unit-cxf:
     runtimeStash: true
   labels:
   - 'rest-api'
-  node: 'h2'
+  nodeLabel: 'h2'
 engine-rest-unit-wink:
   directory: 'engine-rest/engine-rest'
   command: 'clean install -Pwink'
@@ -164,7 +180,7 @@ engine-rest-unit-wink:
     runtimeStash: true
   labels:
   - 'rest-api'
-  node: 'h2'
+  nodeLabel: 'h2'
 engine-rest-unit-jaxrs2-jersey-2:
   directory: 'engine-rest/engine-rest-jaxrs2'
   command: 'clean install -Pjersey2'
@@ -172,7 +188,7 @@ engine-rest-unit-jaxrs2-jersey-2:
     runtimeStash: true
   labels:
   - 'rest-api'
-  node: 'h2'
+  nodeLabel: 'h2'
 engine-rest-unit-jaxrs2-resteasy3:
   directory: 'engine-rest/engine-rest-jaxrs2'
   command: 'clean install -Presteasy3'
@@ -180,7 +196,7 @@ engine-rest-unit-jaxrs2-resteasy3:
     runtimeStash: true
   labels:
   - 'rest-api'
-  node: 'h2'
+  nodeLabel: 'h2'
 engine-rest-unit-compatibility-wildfly:
   directory: 'engine-rest/engine-rest-jaxrs2'
   command: 'clean install -Pwildfly-compatibility,resteasy'
@@ -188,7 +204,7 @@ engine-rest-unit-compatibility-wildfly:
     runtimeStash: true
   labels:
   - 'rest-api'
-  node: 'h2'
+  nodeLabel: 'h2'
 engine-rest-IT-embedded-wildfly:
   directory: 'qa'
   command: 'clean install -Pwildfly,h2,webapps-integration,embedded-engine-rest'
@@ -198,4 +214,4 @@ engine-rest-IT-embedded-wildfly:
     qaStash: true
   labels:
   - 'rest-api'
-  node: 'h2'
+  nodeLabel: 'h2'
