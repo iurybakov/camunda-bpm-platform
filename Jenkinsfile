@@ -14,8 +14,10 @@ pipeline {
         }
       }
       steps {
-        def matrices = readYaml('.ci/config/matrices.yaml')
-        echo matrices
+        script {
+          def matrices = readYaml('.ci/config/matrices.yaml')
+          echo matrices
+        }
       }
     }
   }
