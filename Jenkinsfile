@@ -16,7 +16,7 @@ pipeline {
       steps {
         script {
           def matrices = readYaml(file: '.ci/config/matrices.yaml')
-          echo matrices
+          echo matrices['main-unit'].databases[0]
         }
       }
     }
