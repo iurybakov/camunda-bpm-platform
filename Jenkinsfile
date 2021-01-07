@@ -374,6 +374,11 @@ pipeline {
 //      }
 //    }
     stage('Engine Rest UNIT tests') {
+      agent {
+        node {
+          label 'h2'
+        }
+      }
       steps {
         script {
           parallel(cambpmGetMatrixStages('main-rest', failedStageTypes, { stageType, dbLabel ->
